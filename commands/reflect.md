@@ -95,6 +95,17 @@ Session files are JSONL. Use jq to extract user messages, then grep for patterns
 
 **CRITICAL**: Filter out command expansion messages using `isMeta != true`. Command expansions (like /reflect itself) are stored with `isMeta: true` and contain documentation text that would cause false positives.
 
+**DYNAMIC PATTERN SELECTION**: Before running grep, sample a few user messages to detect the conversation language. If non-English, adapt the patterns accordingly:
+
+| Language | Example patterns to add |
+|----------|------------------------|
+| Russian | `нет,? используй\|не используй\|на самом деле\|запомни:\|лучше\|предпочитаю` |
+| Spanish | `no,? usa\|no uses\|en realidad\|recuerda:\|prefiero\|siempre usa` |
+| German | `nein,? verwende\|nicht verwenden\|eigentlich\|merke:\|bevorzuge\|immer` |
+
+Generate appropriate patterns for the detected language and combine with English patterns.
+
+**Default English patterns:**
 ```bash
 # For each session file, extract REAL user text (exclude command expansions)
 cat "$SESSION_FILE" | jq -r 'select(.type=="user" and .isMeta != true) | .message.content[]? | select(.type=="text") | .text' 2>/dev/null | grep -iE "(no,? use|don't use|actually|remember:|instead|please enable|should be|i prefer|always use|works better)" | head -20
@@ -215,7 +226,7 @@ cat "$SESSION_FILE" | jq -r 'select(.toolUseResult) | .toolUseResult | strings |
 
 **2c. Extract user messages with correction patterns:**
 
-Use the same jq approach from Step 0.5b on the current session file. Remember to use `isMeta != true` to filter out command expansions:
+Use the same jq approach from Step 0.5b on the current session file. Remember to use `isMeta != true` to filter out command expansions. Apply dynamic pattern selection if conversation is non-English (see Step 0.5b for language-specific patterns).
 
 ```bash
 cat "$SESSION_FILE" | jq -r 'select(.type=="user" and .isMeta != true) | .message.content[]? | select(.type=="text") | .text' 2>/dev/null | grep -iE "(no,? use|don't use|actually|remember:|instead|please enable|should be|i prefer|always use|works better)" | head -20
