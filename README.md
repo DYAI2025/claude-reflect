@@ -160,6 +160,22 @@ Then remove the hooks from `~/.claude/settings.json`.
 
 ## File Structure
 
+**Repository:**
+```
+claude-reflect/
+├── SKILL.md                # Skill definition (auto-context for Claude)
+├── .claude-plugin/
+│   └── plugin.json         # Plugin manifest for registries
+├── commands/
+│   ├── reflect.md          # Main command
+│   ├── skip-reflect.md     # Discard queue
+│   └── view-queue.md       # View queue
+├── scripts/                # Hooks and utilities
+└── hooks/
+    └── hooks-example.json  # Hook configuration template
+```
+
+**After installation (~/.claude/):**
 ```
 ~/.claude/
 ├── commands/
