@@ -356,7 +356,7 @@ Group learnings by destination and use AskUserQuestion with multiSelect.
         {"label": "#2 Backoff errors", "description": "Implement backoff only on actual errors, not artificial delays"},
         {"label": "#3 DB cache", "description": "Use local database cache to minimize data fetching"},
         {"label": "#4 Batch+delays", "description": "Use batching with stochastic delays for API rate limits"},
-        {"label": "#5 Gemini model", "description": "Use gemini-3-flash-preview for LLM tasks"}
+        {"label": "#5 Use venv", "description": "Always use virtual environments for Python projects"}
       ]
     }
   ]
