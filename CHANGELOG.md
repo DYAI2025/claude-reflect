@@ -5,6 +5,24 @@ All notable changes to claude-reflect will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.1] - 2026-01-06
+
+### Fixed
+- **Plugin installation error** - Removed duplicate hooks declaration from plugin.json (#9)
+  - The `hooks/hooks.json` file is auto-loaded by Claude Code; explicitly declaring it in manifest caused "Duplicate hooks file detected" error
+
+## [2.1.0] - 2026-01-05
+
+### Added
+- **Tool Error Extraction** - Scan session files for repeated tool execution errors and convert to CLAUDE.md guidelines (#7)
+  - Extracts connection errors, environment issues, module not found errors
+  - Filters out Claude Code guardrails and one-off errors
+  - Usage: `/reflect --scan-history --include-tool-errors`
+- **Mandatory TodoWrite Tracking** - `/reflect` workflow now uses TodoWrite to track all phases
+
+### Changed
+- Improved workflow visibility with real-time progress tracking
+
 ## [2.0.0] - 2026-01-04
 
 ### Added
