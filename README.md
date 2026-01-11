@@ -82,7 +82,10 @@ After installation, **restart Claude Code** (exit and reopen). Then hooks auto-c
 | `/reflect --targets` | Show detected config files (CLAUDE.md, AGENTS.md) |
 | `/reflect --review` | Show queue with confidence scores and decay status |
 | `/reflect --dedupe` | Find and consolidate similar entries in CLAUDE.md |
+| `/reflect --include-tool-errors` | Include tool execution errors in scan |
 | `/reflect-skills` | Discover skill candidates from repeating patterns |
+| `/reflect-skills --days N` | Analyze last N days (default: 14) |
+| `/reflect-skills --project <path>` | Analyze specific project |
 | `/reflect-skills --all-projects` | Scan all projects for cross-project patterns |
 | `/reflect-skills --dry-run` | Preview patterns without generating skill files |
 | `/skip-reflect` | Discard all queued learnings |
@@ -319,6 +322,7 @@ claude-reflect/
 │   ├── post_commit_reminder.py   # Hook: post-commit reminder
 │   ├── compare_detection.py      # Compare regex vs semantic detection
 │   ├── extract_session_learnings.py
+│   ├── extract_tool_errors.py
 │   ├── extract_tool_rejections.py
 │   └── legacy/                   # Bash scripts (deprecated)
 ├── tests/                  # Test suite
